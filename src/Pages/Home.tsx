@@ -23,7 +23,7 @@ const Home = () => {
   const [recipes, setRecipes] = useState<
     {
       label: string;
-      image?: string;
+      image: string;
       id: string;
       source: string;
       ingredientLines: string[];
@@ -40,8 +40,6 @@ const Home = () => {
       </div>
     ));
 
-  // https://api.edamam.com/api/recipes/v2?type=public&q=chicken%26bananas&app_id=2ab8f078&app_key=49e99396afb193fb2d35934b1df350cd
-
   const handleOnClick = () => {
     const ingredients = itemsList.join("%20");
     const fetchData = async () => {
@@ -51,17 +49,23 @@ const Home = () => {
         }&app_key=${import.meta.env.VITE_EDAMAM_KEY}&random=true`
       );
       const data = await res.json();
-      setRecipes([
-        {
-          label: data.hits[0].recipe.label,
-          image: data.hits[0].recipe.image,
+      const recipes = data.hits.map(
+        (recipe: {
+          recipe: {
+            label: string;
+            image: string;
+            source: string;
+            ingredientLines: string[];
+          };
+        }) => ({
+          label: recipe.recipe.label,
+          image: recipe.recipe.image,
           id: createId(),
-          source: data.hits[0].recipe.source,
-          ingredientLines: data.hits[0].recipe.ingredientLines,
-        },
-      ]);
-      console.log({ itemsList });
-      console.log({ recipes });
+          source: recipe.recipe.source,
+          ingredientLines: recipe.recipe.ingredientLines,
+        })
+      );
+      setRecipes([...recipes]);
     };
     fetchData();
   };
