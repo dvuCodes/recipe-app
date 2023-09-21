@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Search from "@/components/Search";
+import EmptyList from "@/components/EmptyList";
 
 // shad uis
 import { Button } from "@/components/ui/button";
@@ -31,9 +32,14 @@ const Home = () => {
       <div className="flex flex-col justify-center items-center p-4">
         <Search setItemsList={setItemsList} />
       </div>
-      <div className="border p-4 grid grid-cols-4 gap-x-2 place-center">
-        {renderItems()}
-      </div>
+      {itemsList.length > 0 ? (
+        <div className="border p-4 grid grid-cols-4 gap-x-2 place-center">
+          {renderItems()}
+        </div>
+      ) : (
+        <EmptyList />
+      )}
+
       <div className="flex justify-center p-4">
         <Button>Let's Cook</Button>
       </div>
