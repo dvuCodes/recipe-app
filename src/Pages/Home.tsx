@@ -23,7 +23,7 @@ const Home = () => {
   const [recipes, setRecipes] = useState<
     {
       label: string;
-      image: string;
+      image?: string;
       id: string;
       source: string;
       ingredientLines: string[];
