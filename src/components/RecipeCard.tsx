@@ -1,3 +1,5 @@
+import { RecipeProps } from "@/Pages/Home";
+
 import {
   Card,
   CardContent,
@@ -6,6 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+interface RecipeCardProps {
+  recipe: RecipeProps;
+}
 
 const RecipeCard = () => {
   return (
