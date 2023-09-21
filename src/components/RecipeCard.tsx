@@ -1,5 +1,5 @@
 import { RecipeProps } from "@/Pages/Home";
-import useHover from "@/Hooks/useHover";
+import { useEffect, useState } from "react";
 
 import {
   Card,
@@ -15,8 +15,17 @@ interface RecipeCardProps {
 }
 
 const RecipeCard = ({ recipes }: RecipeCardProps) => {
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    console.log(`hovering`);
+  }, [isHovering]);
+
   return (
-    <Card className="overflow-hidden cursor-pointer flex flex-col">
+    <Card
+      className="overflow-hidden cursor-pointer flex flex-col"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}>
       <CardHeader className="p-0">
         <img
           src={recipes.image}
@@ -26,7 +35,10 @@ const RecipeCard = ({ recipes }: RecipeCardProps) => {
       </CardHeader>
       <CardContent className="p-3">
         <div className="flex justify-between">
-          <CardTitle className="text-m pb-2">{recipes.label}</CardTitle>
+          <CardTitle
+            className={`text-m pb-2 ${isHovering ? "text-red-400" : ""}`}>
+            {recipes.label}
+          </CardTitle>
           <i className="fa-regular fa-star"></i>
         </div>
         <CardDescription className="text-xs pb-2">
