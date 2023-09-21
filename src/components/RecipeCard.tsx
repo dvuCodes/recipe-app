@@ -25,7 +25,12 @@ const RecipeCard = () => {
         <CardDescription className="text-xs pb-2">
           Card Description
         </CardDescription>
-        <p className="text-xs">Card Content</p>
+        <p className="text-xs">
+          Card Content Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Corporis at quos iure, alias dolorum nihil officia expedita rem!
+          Facilis tenetur deserunt maiores voluptates quo nesciunt molestias
+          officiis blanditiis ipsam dolore?
+        </p>
       </CardContent>
       <CardFooter className="p-3 text-xs">
         <p>Card Footer</p>
