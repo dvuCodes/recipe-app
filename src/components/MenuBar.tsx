@@ -2,7 +2,7 @@ import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 
 export function MenuBar() {
   return (
-    <Menubar>
+    <Menubar className="mt-auto">
       <MenubarMenu>
         <MenubarTrigger>
           <i class="fa-solid fa-magnifying-glass"></i>
