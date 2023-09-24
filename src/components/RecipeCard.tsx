@@ -1,5 +1,6 @@
 import { RecipeProps } from "@/Pages/Home";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import {
   Card,
@@ -22,37 +23,38 @@ const RecipeCard = ({ recipes }: RecipeCardProps) => {
   }, [isHovering]);
 
   return (
-    <Card
-      className="overflow-hidden cursor-pointer flex flex-col"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}>
+    <Card className="overflow-hidden  flex flex-col">
       <CardHeader className="p-0">
         <img
           src={recipes.image}
           alt={recipes.label}
-          className="ml-auto h-40 w-full object-cover"
+          className="ml-auto h-40 w-full object-cover cursor-pointer"
         />
       </CardHeader>
       <CardContent className="p-3">
-        <div className="flex justify-between">
-          <CardTitle
-            className={`text-m pb-2 ${isHovering ? "text-red-400" : ""}`}>
-            {recipes.label}
-          </CardTitle>
+        <div className="flex justify-between gap-2">
+          <Link to={`/recipe/${recipes.id}`}>
+            <CardTitle
+              className={`text-m pb-2 cursor-pointer ${
+                isHovering ? "text-red-400" : ""
+              }`}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}>
+              {recipes.label}
+            </CardTitle>
+          </Link>
+
           <i className="fa-regular fa-star"></i>
         </div>
         <CardDescription className="text-xs pb-2">
           {recipes.ingredientLines.length} Ingredients
         </CardDescription>
-        {/* <p className="text-xs">
-          Card Content Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Corporis at quos iure, alias dolorum nihil officia expedita rem!
-          Facilis tenetur deserunt maiores voluptates quo nesciunt molestias
-          officiis blanditiis ipsam dolore?
-        </p> */}
+        <p>{recipes.calories}</p>
       </CardContent>
       <CardFooter className="p-3 text-xs mt-auto">
-        <p>{recipes.source}</p>
+        <a href={recipes.url} target="_blank">
+          <p>{recipes.source}</p>
+        </a>
       </CardFooter>
     </Card>
   );

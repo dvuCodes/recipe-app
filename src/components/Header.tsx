@@ -1,6 +1,8 @@
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { MenuBar } from "./MenuBar";
+import { NavLink } from "react-router-dom";
+
 const Header = () => {
   return (
     <header className="flex p-4 justify-center top-0 w-full sticky bg-white z-10">

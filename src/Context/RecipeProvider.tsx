@@ -1,23 +1,26 @@
+import React from "react";
 import { useState } from "react";
-
-import Search from "@/components/Search";
-import EmptyList from "@/components/EmptyList";
 import createId from "@/utils/createId";
 
-// shad uis
-import { Button } from "@/components/ui/button";
-import SearchResults from "@/components/SearchResults";
-import { Badge } from "@/components/ui/badge";
-
-export interface RecipeProps {
-  label: string;
-  image: string;
-  id: string;
-  source: string;
-  ingredientLines: string[];
+interface ContextType {
+  recipes: {
+    label: string;
+    image: string;
+    id: string;
+    source: string;
+    ingredientLines: string[];
+    url: string;
+    calories: number;
+  }[];
+  setRecipes: React.Dispatch<React.SetStateAction<typeof recipes>>;
+  handleOnClick: () => void;
+  setItemsList: React.Dispatch<React.SetStateAction<string[]>>;
+  itemsList: string[];
 }
 
-const Home = () => {
+const Context = React.createContext<ContextType | undefined>(undefined);
+
+const RecipeProvider = ({ children }) => {
   const [itemsList, setItemsList] = useState<string[]>([]);
   const [recipes, setRecipes] = useState<
     {
@@ -30,16 +33,6 @@ const Home = () => {
       calories: number;
     }[]
   >([]);
-
-  const renderItems = () =>
-    itemsList.map((item, index) => (
-      <div className="relative" key={index}>
-        <Badge variant="outline" className="justify-center p-4 w-full">
-          {item}
-          <div className="absolute right-0 p-4 cursor">x</div>
-        </Badge>
-      </div>
-    ));
 
   const handleOnClick = () => {
     const ingredients = itemsList.join("%20");
@@ -74,26 +67,13 @@ const Home = () => {
     };
     fetchData();
   };
-  //
-  return (
-    <>
-      <div className="flex flex-col justify-center items-center p-4">
-        <Search setItemsList={setItemsList} />
-      </div>
-      {itemsList.length > 0 ? (
-        <div className="border p-4 grid grid-cols-4 gap-x-2 place-center">
-          {renderItems()}
-        </div>
-      ) : (
-        <EmptyList />
-      )}
 
-      <div className="flex justify-center p-4">
-        <Button onClick={handleOnClick}>Let's Cook</Button>
-      </div>
-      <SearchResults recipes={recipes} />
-    </>
+  return (
+    <Context.Provider
+      value={{ recipes, setRecipes, handleOnClick, setItemsList, itemsList }}>
+      {children}
+    </Context.Provider>
   );
 };
 
-export default Home;
+export { Context, RecipeProvider };
