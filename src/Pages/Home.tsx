@@ -87,7 +87,9 @@ const Home = () => {
         <Button onClick={handleOnClick}>Let's Cook</Button>
       </div>
       <SearchResults recipes={recipes} />
-      <MenuBar />
+      <div className="menu-mobile justify-center">
+        <MenuBar />
+      </div>
     </>
   );
 };

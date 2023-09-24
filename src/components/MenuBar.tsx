@@ -1,28 +1,39 @@
 import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
+import { NavLink } from "react-router-dom";
 
 export function MenuBar() {
   return (
-    <Menubar className="mt-auto w-full">
-      <MenubarMenu>
-        <MenubarTrigger>
-          <i className="fa-solid fa-magnifying-glass"></i>
-        </MenubarTrigger>
-      </MenubarMenu>
-      <MenubarMenu>
-        <MenubarTrigger>
-          <i className="fa-regular fa-star"></i>
-        </MenubarTrigger>
-      </MenubarMenu>
-      <MenubarMenu>
-        <MenubarTrigger>
-          <i className="fa-solid fa-bars"></i>
-        </MenubarTrigger>
-      </MenubarMenu>
-      <MenubarMenu>
-        <MenubarTrigger>
-          <i className="fa-regular fa-user"></i>
-        </MenubarTrigger>
-      </MenubarMenu>
-    </Menubar>
+    <nav>
+      <Menubar className=" border-0">
+        <MenubarMenu>
+          <MenubarTrigger>
+            <NavLink to="/">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </NavLink>
+          </MenubarTrigger>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger>
+            <NavLink to="/favorites">
+              <i className="fa-regular fa-star"></i>
+            </NavLink>
+          </MenubarTrigger>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger>
+            <NavLink to="/">
+              <i className="fa-solid fa-bars"></i>
+            </NavLink>
+          </MenubarTrigger>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger>
+            <NavLink to="/profile">
+              <i className="fa-regular fa-user"></i>
+            </NavLink>
+          </MenubarTrigger>
+        </MenubarMenu>
+      </Menubar>
+    </nav>
   );
 }
