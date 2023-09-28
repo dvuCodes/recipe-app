@@ -1,12 +1,12 @@
 import RecipeCard from "./RecipeCard";
+import { Context } from "@/Context/RecipeProvider";
+import { useContext } from "react";
 
-import { RecipeProps } from "@/Pages/Home";
+const SearchResults = () => {
+  const { recipes } = useContext(Context);
 
-interface RecipeCardProps {
-  recipes: RecipeProps[];
-}
+  console.log(recipes);
 
-const SearchResults = ({ recipes }: RecipeCardProps) => {
   const renderCards = () =>
     recipes?.map((item, index) => <RecipeCard key={index} recipes={item} />);
 

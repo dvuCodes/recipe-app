@@ -16,11 +16,12 @@ export interface RecipeProps {
   id: string;
   source: string;
   ingredientLines: string[];
+  calories: number;
+  url: string;
 }
 
 const Home = () => {
-  const { recipes, handleOnClick, itemsList, setItemsList } =
-    useContext(Context);
+  const { handleOnClick, itemsList, setItemsList } = useContext(Context);
 
   const renderItems = () =>
     itemsList.map((item, index) => (
@@ -49,7 +50,7 @@ const Home = () => {
       <div className="flex justify-center p-4">
         <Button onClick={handleOnClick}>Let's Cook</Button>
       </div>
-      <SearchResults recipes={recipes} />
+      <SearchResults />
     </>
   );
 };

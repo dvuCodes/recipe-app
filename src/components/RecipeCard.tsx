@@ -1,5 +1,5 @@
 import { RecipeProps } from "@/Pages/Home";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -12,15 +12,11 @@ import {
 } from "@/components/ui/card";
 
 interface RecipeCardProps {
-  recipes: RecipeProps[];
+  recipes: RecipeProps;
 }
 
 const RecipeCard = ({ recipes }: RecipeCardProps) => {
   const [isHovering, setIsHovering] = useState(false);
-
-  useEffect(() => {
-    console.log(`hovering`);
-  }, [isHovering]);
 
   return (
     <Card className="overflow-hidden  flex flex-col">

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="flex p-4 justify-center top-0 w-full sticky bg-white z-10">
+    <header className="flex p-4 justify-center top-0 w-full sticky bg-white z-10 border-b">
       <div className="flex md:max-w-6xl w-full gap-2 justify-between">
         <h1>This is the header</h1>
         <div className="menu-desktop ml-auto">
