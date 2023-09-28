@@ -1,7 +1,6 @@
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { MenuBar } from "./MenuBar";
-import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (

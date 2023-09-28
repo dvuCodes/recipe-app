@@ -1,12 +1,11 @@
 import { useParams } from "react-router-dom";
 import { Context } from "@/Context/RecipeProvider";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 const Recipe = () => {
   const params = useParams();
   const { recipes } = useContext(Context);
-  const [isHovering, setIsHovering] = useState<boolean>(false);
 
   const getRecipe = recipes.find((recipe) => recipe.id === params.recipeId);
 
