@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import Search from "@/components/Search";
 import EmptyList from "@/components/EmptyList";
@@ -8,6 +8,7 @@ import createId from "@/utils/createId";
 import { Button } from "@/components/ui/button";
 import SearchResults from "@/components/SearchResults";
 import { Badge } from "@/components/ui/badge";
+import { Context } from "@/Context/RecipeProvider";
 
 export interface RecipeProps {
   label: string;
@@ -18,18 +19,8 @@ export interface RecipeProps {
 }
 
 const Home = () => {
-  const [itemsList, setItemsList] = useState<string[]>([]);
-  const [recipes, setRecipes] = useState<
-    {
-      label: string;
-      image: string;
-      id: string;
-      source: string;
-      ingredientLines: string[];
-      url: string;
-      calories: number;
-    }[]
-  >([]);
+  const { recipes, handleOnClick, itemsList, setItemsList } =
+    useContext(Context);
 
   const renderItems = () =>
     itemsList.map((item, index) => (
@@ -41,40 +32,7 @@ const Home = () => {
       </div>
     ));
 
-  const handleOnClick = () => {
-    const ingredients = itemsList.join("%20");
-    const fetchData = async () => {
-      const res = await fetch(
-        `https://api.edamam.com/api/recipes/v2?type=public&beta=true&q=${ingredients}&app_id=${
-          import.meta.env.VITE_EDAMAM_ID
-        }&app_key=${import.meta.env.VITE_EDAMAM_KEY}&random=true`
-      );
-      const data = await res.json();
-      const recipes = data.hits.map(
-        (recipe: {
-          recipe: {
-            label: string;
-            image: string;
-            source: string;
-            ingredientLines: string[];
-            url: string;
-            calories: number;
-          };
-        }) => ({
-          label: recipe.recipe.label,
-          image: recipe.recipe.image,
-          id: createId(),
-          source: recipe.recipe.source,
-          ingredientLines: recipe.recipe.ingredientLines,
-          url: recipe.recipe.url,
-          calories: recipe.recipe.calories,
-        })
-      );
-      setRecipes([...recipes]);
-    };
-    fetchData();
-  };
-  //
+  console.log(itemsList);
   return (
     <>
       <div className="flex flex-col justify-center items-center p-4">

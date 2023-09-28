@@ -4,15 +4,19 @@ import React, {
   Dispatch,
   SetStateAction,
   useRef,
+  useContext,
 } from "react";
+
+import { Context } from "@/Context/RecipeProvider";
 
 interface SearchProps {
   setItemsList: Dispatch<SetStateAction<string[]>>;
 }
 
-const Search: React.FC<SearchProps> = ({ setItemsList }) => {
+const Search: React.FC<SearchProps> = () => {
   const [searchItem, setSearchItem] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const { setItemsList } = useContext(Context);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

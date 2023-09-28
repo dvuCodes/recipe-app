@@ -33,7 +33,7 @@ const RecipeCard = ({ recipes }: RecipeCardProps) => {
       </CardHeader>
       <CardContent className="p-3">
         <div className="flex justify-between gap-2">
-          <Link to={`/recipe/${recipes.id}`}>
+          <Link to={`/recipes/${recipes.id}`}>
             <CardTitle
               className={`text-m pb-2 cursor-pointer ${
                 isHovering ? "text-red-400" : ""

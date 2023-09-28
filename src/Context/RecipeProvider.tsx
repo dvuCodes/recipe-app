@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 import createId from "@/utils/createId";
 
 interface ContextType {
@@ -12,15 +11,27 @@ interface ContextType {
     url: string;
     calories: number;
   }[];
-  setRecipes: React.Dispatch<React.SetStateAction<typeof recipes>>;
+  setRecipes: React.Dispatch<React.SetStateAction<ContextType["recipes"]>>;
   handleOnClick: () => void;
   setItemsList: React.Dispatch<React.SetStateAction<string[]>>;
   itemsList: string[];
 }
 
-const Context = React.createContext<ContextType | undefined>(undefined);
+interface Props {
+  children: ReactNode;
+}
 
-const RecipeProvider = ({ children }) => {
+const defaultValue: ContextType = {
+  recipes: [],
+  setRecipes: () => {},
+  handleOnClick: () => {},
+  setItemsList: () => {},
+  itemsList: [],
+};
+
+const Context = createContext(defaultValue);
+
+const RecipeProvider = ({ children }: Props) => {
   const [itemsList, setItemsList] = useState<string[]>([]);
   const [recipes, setRecipes] = useState<
     {
@@ -67,10 +78,11 @@ const RecipeProvider = ({ children }) => {
     };
     fetchData();
   };
+  //
 
   return (
     <Context.Provider
-      value={{ recipes, setRecipes, handleOnClick, setItemsList, itemsList }}>
+      value={{ itemsList, handleOnClick, setItemsList, recipes, setRecipes }}>
       {children}
     </Context.Provider>
   );
