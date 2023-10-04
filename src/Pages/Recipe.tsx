@@ -10,30 +10,33 @@ const Recipe = () => {
   const getRecipe = recipes.find((recipe) => recipe.id === params.recipeId);
 
   return (
-    <article className="flex flex-col">
-      <div className="flex flex-col md:flex-row-reverse md:justify-center p-4 gap-4 shadow-xl">
-        <h1 className="text-4xl p-10 font-bold">{getRecipe?.label}</h1>
+    <article className="flex flex-col max-w-[650px] mx-auto">
+      <div className=" flex flex-col md:flex-row-reverse md:justify-center px-4 py-10 gap-4">
         <img
           src={getRecipe?.image}
           alt={getRecipe?.label}
-          className="max-w-[300px] max-h-[300px] mx-auto"
+          className="w-full max-w-lg x-auto object-cover h-60"
         />
+        <div className="flex flex-col gap-5">
+          <h1 className="text-4xl font-bold">{getRecipe?.label}</h1>
+          <a
+            href={getRecipe?.url}
+            className=" rounded-xl p-4 w-fit border-white text-xs">
+            For instructions at{" "}
+            <span className="underline ">{getRecipe?.source}</span>
+          </a>
+        </div>
       </div>
-      <div className="p-4 flex flex-col">
-        <h3 className="text-2xl">Ingredients</h3>
+      <span className="w-full grow h-3 border-t-2"></span>
+      <div className="p-4 flex flex-col bg-gray-50">
+        <h3 className="text-2xl pb-5">Ingredients</h3>
         <div>
-          <ul>
+          <ul className="list-disc">
             {getRecipe?.ingredientLines.map((item) => (
-              <li>{item}</li>
+              <li className="pl-2 ml-5">{item}</li>
             ))}
           </ul>
         </div>
-        <a
-          href={getRecipe?.url}
-          className=" rounded-xl p-4 mt-auto w-fit border">
-          For instructions at{" "}
-          <span className="underline">{getRecipe?.source}</span>
-        </a>
       </div>
       <button>
         <Link to="../">Back</Link>

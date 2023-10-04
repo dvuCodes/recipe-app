@@ -7,7 +7,7 @@ const MainLayout = () => {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex justify-center grow ">
-        <div className=" flex flex-col w-full md:max-w-6xl border-x ">
+        <div className=" flex flex-col w-full md:max-w-6xl ">
           <Outlet />
         </div>
       </main>
