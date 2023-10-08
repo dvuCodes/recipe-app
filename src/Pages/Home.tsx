@@ -1,7 +1,5 @@
 import Search from "@/components/Search";
 import EmptyList from "@/components/EmptyList";
-import { db } from "@/utils/firebase";
-import { collection, addDoc } from "firebase/firestore";
 
 // shad uis
 import { Button } from "@/components/ui/button";
