@@ -78,7 +78,6 @@ const RecipeProvider = ({ children }: Props) => {
     };
     fetchData();
   };
-  //
 
   return (
     <Context.Provider

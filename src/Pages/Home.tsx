@@ -1,5 +1,7 @@
 import Search from "@/components/Search";
 import EmptyList from "@/components/EmptyList";
+import { db } from "@/utils/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 // shad uis
 import { Button } from "@/components/ui/button";
@@ -7,7 +9,6 @@ import SearchResults from "@/components/SearchResults";
 import { Badge } from "@/components/ui/badge";
 import { Context } from "@/Context/RecipeProvider";
 import { useContext } from "react";
-import { remove } from "firebase/database";
 
 export interface RecipeProps {
   label: string;

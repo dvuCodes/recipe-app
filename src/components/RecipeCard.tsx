@@ -2,6 +2,11 @@ import { RecipeProps } from "@/Pages/Home";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+// firebase imports
+import { db } from "@/utils/firebase";
+import { collection, addDoc } from "firebase/firestore";
+
+// shad imports
 import {
   Card,
   CardContent,
@@ -17,6 +22,17 @@ interface RecipeCardProps {
 
 const RecipeCard = ({ recipes }: RecipeCardProps) => {
   const [isHovering, setIsHovering] = useState(false);
+
+  const addToCollection = async () => {
+    try {
+      const itemRef = await addDoc(collection(db, "recipes"), {
+        ...recipes,
+      });
+      console.log("item added", itemRef.id);
+    } catch (e) {
+      console.log("error adding item", e);
+    }
+  };
 
   return (
     <Card className="overflow-hidden  flex flex-col">
@@ -40,7 +56,9 @@ const RecipeCard = ({ recipes }: RecipeCardProps) => {
             </CardTitle>
           </Link>
 
-          <i className="fa-regular fa-star"></i>
+          <button
+            className="fa-regular fa-star hover:scale-110 transition-all duration-200"
+            onClick={() => addToCollection()}></button>
         </div>
         <CardDescription className="text-xs pb-2">
           {recipes.ingredientLines.length} Ingredients
