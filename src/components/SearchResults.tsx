@@ -5,8 +5,6 @@ import { useContext } from "react";
 const SearchResults = () => {
   const { recipes } = useContext(Context);
 
-  console.log(recipes);
-
   const renderCards = () =>
     recipes?.map((item, index) => <RecipeCard key={index} recipes={item} />);
 
