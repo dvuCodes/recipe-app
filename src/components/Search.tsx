@@ -26,14 +26,17 @@ const Search: React.FC<SearchProps> = () => {
   };
 
   return (
-    <form className="w-full flex justify-center" onSubmit={handleSubmit}>
+    <form className="w-full flex justify-cente" onSubmit={handleSubmit}>
       <input
         type="text"
-        className="rounded-full p-4 w-[80%] "
+        className="rounded-tl-full rounded-bl-full p-4 w-[80%] "
         placeholder="Type something.."
         onChange={(e) => setSearchItem(e.target.value)}
         ref={inputRef}
       />
+      <button className="rounded-tr-full rounded-br-full bg-slate-400 w-20 cursor-pointer ">
+        Submit
+      </button>
     </form>
   );
 };

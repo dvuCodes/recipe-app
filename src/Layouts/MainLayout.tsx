@@ -2,11 +2,39 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Outlet } from "react-router-dom";
 import SignIn from "@/components/SignIn";
+
+import { useEffect } from "react";
+
+// firebase imports
+import { db } from "@/utils/firebase";
+import { setDoc, doc } from "firebase/firestore";
 import { auth } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const MainLayout = () => {
   const [user] = useAuthState(auth);
+
+  const addUser = async () => {
+    if (!user) return; // returns early if no users are signed in
+
+    // references the user ID in the users collection
+    const userRef = doc(db, "users", user.uid);
+
+    console.log(userRef.id);
+
+    const userData = {
+      userId: user.uid,
+      email: user.email,
+    };
+
+    await setDoc(userRef, userData);
+  };
+
+  useEffect(() => {
+    if (user) {
+      addUser(); // Call the addUser function when a user is signed in
+    }
+  }, [user]); // Dependency on 'user' ensures this effect runs whenever 'user' changes
 
   if (user) {
     return (

@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 
 // firebase imports
 import { db } from "@/utils/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc } from "firebase/firestore";
+import { auth } from "../utils/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 // shad imports
 import {
@@ -22,12 +24,19 @@ interface RecipeCardProps {
 
 const RecipeCard = ({ recipes }: RecipeCardProps) => {
   const [isHovering, setIsHovering] = useState(false);
+  const [user] = useAuthState(auth);
 
   const addToCollection = async () => {
+    if (!user) return;
+
+    const userRef = doc(db, "users", user.uid);
     try {
-      const itemRef = await addDoc(collection(db, "recipes"), {
-        ...recipes,
-      });
+      const itemRef = await addDoc(
+        collection(db, `users/${userRef.id}/savedRecipes`),
+        {
+          ...recipes,
+        }
+      );
       console.log("item added", itemRef.id);
     } catch (e) {
       console.log("error adding item", e);
@@ -63,7 +72,7 @@ const RecipeCard = ({ recipes }: RecipeCardProps) => {
         <CardDescription className="text-xs pb-2">
           {recipes.ingredientLines.length} Ingredients
         </CardDescription>
-        <p>{recipes.calories}</p>
+        <p>{recipes.calories.toFixed(2)} Calories</p>
       </CardContent>
       <CardFooter className="p-3 text-xs mt-auto">
         <a href={recipes.url} target="_blank">
