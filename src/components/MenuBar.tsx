@@ -21,13 +21,6 @@ export function MenuBar() {
         </MenubarMenu>
         <MenubarMenu>
           <MenubarTrigger>
-            <NavLink to="/">
-              <i className="fa-solid fa-bars"></i>
-            </NavLink>
-          </MenubarTrigger>
-        </MenubarMenu>
-        <MenubarMenu>
-          <MenubarTrigger>
             <NavLink to="/profile">
               <i className="fa-regular fa-user"></i>
             </NavLink>
